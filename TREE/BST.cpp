@@ -1,22 +1,67 @@
 #include <iostream>
 using namespace std;
+#include<stack>
 
-struct BstNode{     //The user defined data strcutre BstNode
+struct node{     //The user defined data strcutre node
     int data;       //The node value
-    BstNode* left;  //Store the left subtree root address
-    BstNode* right; //Store the right subtree root address
+    node* left;  //Store the left subtree root address
+    node* right; //Store the right subtree root address
 };
-BstNode* GetNewNode(int data){        //Create a new node with value=data and left/right = NULL
-    BstNode* NewNode = new BstNode();
-    //(*NewNode).data = data; //Same function with diffrerent expression
-    NewNode->data = data;
-    NewNode->left = NewNode ->right = NULL;
-    return NewNode; //Return the address of new node
+node* GetNewnode(int data){        //Create a new node with value=data and left/right = NULL
+    node* Newnode = new node();
+    //(*Newnode).data = data; //Same function with diffrerent expression
+    Newnode->data = data;
+    Newnode->left = Newnode ->right = NULL;
+    return Newnode; //Return the address of new node
 }
-BstNode* Insert(BstNode* root, int data){      //Find the proper way to insert the node with value=data
+
+node* Insert_iteration(node *root, int data){ //iteration way to insert
+    node* new_node= GetNewnode(data);
+    node* temp=root;
+    node* prev;
+    if (temp==NULL){        
+        return new_node;
+    }
+    //Stupid way to find the last node
+    // while(!(data<=temp->data && temp->left==NULL) && !(data>temp->data && temp->right==NULL)){
+    //     if (data<=temp->data){
+    //         temp=temp->left;
+    //     }
+    //     else{
+    //         temp=temp->right;
+    //     }
+    // }
+    //     if (data<=temp->data){
+    //         temp->left=new_node;
+    //     }
+    //     else{
+    //         temp->right=new_node;
+    //     }    
+    //Create a previous node and use it directly 
+    while(temp!=NULL){
+        if (data<=temp->data){
+            prev=temp;
+            temp=temp->left;
+        }
+        else{
+            prev=temp;
+            temp=temp->right;
+        }
+    }
+        if (data<=prev->data){
+            prev->left=new_node;
+        }
+        else{
+            prev->right=new_node;
+        }   
+        return root;
+}
+
+
+node* Insert(node* root, int data){      //Find the proper way to insert the node with value=data
 
     if (root == NULL){          //If there is no subtree(no node below)
-        root = GetNewNode(data); //Create a new node with address root
+        root = GetNewnode(data); //Create a new node with address root
     }
     else if(data <= root->data){
         root->left = Insert(root->left,data);  //if data<value go to insert the data on the left. Compare the data until there is no subtree
@@ -29,13 +74,7 @@ BstNode* Insert(BstNode* root, int data){      //Find the proper way to insert t
 
 } 
 
-// void Insert1(BstNode** rootP, int data){
-//     if (*rootP == NULL){
-//         *rootP=GetNewNode(data);
-//     }
-// }
-
-bool search(BstNode* root, int data){
+bool search(node* root, int data){
 
     if (root == NULL) return false;
     else if (data == root->data) return true;
@@ -43,51 +82,64 @@ bool search(BstNode* root, int data){
     else return search(root->right,data);
 }
 
-void printnodepre(BstNode* root){
+void printnodepre(node* root){
+    if (root == NULL){
+        return ;
+    }
+    printnodepre(root->left);
+        cout<<root->data<<" ";
+    printnodepre(root->right);
+}
+
+void printnodein(node* root){
     if (root == NULL){
         return ;
     }
     cout<<root->data<<" ";
-    printnodepre(root->left);
-    printnodepre(root->right);
+    printnodein(root->left);
+    printnodein(root->right);
 }
-
-void printnodein(BstNode* root){
+void printnodepost(node* root){
     if (root == NULL){
         return ;
     }
-    printnodein(root->left);
-        cout<<root->data<<" ";
-
     printnodein(root->right);
-}
-    
+    cout<<root->data<<" ";
+    printnodein(root->left);
+}    
 
 int main(){
-//BstNode* rootPtr; //to store address of root node. The ptr type is BstNode type
+//node* rootPtr; //to store address of root node. The ptr type is node type
 //rootPtr = NULL; //When tree is empty, rootPtr is NULL
-BstNode* root=NULL; // Create a empty tree. The only entry to the tree
+node* root=NULL; // Create a empty tree. The only entry to the tree
+node* root2=NULL;
 root = Insert(root,15); //Every time the insertion starting form roof
 // Insert1(&rootPtr,15);   //Same way
 root = Insert(root,10);  //The Recersive process return back to the top
 root = Insert(root,20);
 root = Insert(root,6);
 root = Insert(root,23);
-root = Insert(root,59);
-root = Insert(root,12);
-root = Insert(root,14);
-root = Insert(root,18);
-root = Insert(root,28);
-
-
+// root = Insert(root,59);
+// root = Insert(root,12);
+// root = Insert(root,14);
+// root = Insert(root,18);
+// root = Insert(root,28);
 printnodein(root);
-printnodepre(root);
+root2 = Insert_iteration(root2,15); //Every time the insertion starting form roof
+// Insert1(&rootPtr,15);   //Same way
+root2 = Insert_iteration(root2,10);  //The Recersive process return back to the top
+root2 = Insert_iteration(root2,20);
+root2 = Insert_iteration(root2,6);
+root2 = Insert_iteration(root2,23);
 
-int number;
-cout<<"Enter the search number\n";
-cin>>number;
-if(search(root,number)) cout<<"Number is here\n";
-else cout<<"Sorry not found\n";
+printnodein(root2);
+//printnodepre(root);
+
+// int number;
+// cout<<"Enter the search number\n";
+// cin>>number;
+// if(search(root,number)) cout<<"Number is here\n";
+// else cout<<"Sorry not found\n";
 
 };
 
