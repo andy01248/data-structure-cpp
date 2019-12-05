@@ -3,6 +3,17 @@ using namespace std;
 #define MAX_SIZE 101
 int top=-1; //the top position of stack
 int stack_array[MAX_SIZE];
+//Create own stack
+// class Stack{
+//     private:
+//     char A[101];
+//     int top;
+//     public:
+//     void Push(int x);
+//     void Pop();
+//     int Top();
+//     bool IsEmpty();
+// };
 void push(int data){
 
     if (top==MAX_SIZE-1){
