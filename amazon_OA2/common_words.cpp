@@ -13,8 +13,9 @@ public:
                 temp="";          //re inilizae it
             }
         }
+        if (temp!="") Freq[temp]++;
         for (auto a : Freq){            //check for 
-            if (a.second >max_count && find(banned.begin(),banned.end(),a.first)==banned.end()){
+            if (a.second>max_count && find(banned.begin(),banned.end(),a.first)==banned.end()){
                 max_count = a.second;
                 temp=a.first;
             }

@@ -83,8 +83,6 @@ vector<int> movie(vector<int>& nums, int target) {
             }
          return res;
     }
-
-
 };
 
 int main(){

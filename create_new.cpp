@@ -26,6 +26,12 @@ int **p = new int*[5]; //create a point to array with size 5
 for(int i=0; i<5;i++){
     p[i]= new int[6];    //for each position of previous array, create a new point to array with size 6
 }   //dynamic 2d array with p[5][6]  a array of pointers to your arrays. 
+p[2][3]=5;
+cout<<p[2][3]*p[2][3]<<"Dddd";
+vector< pair<int,int> > vec1;
+vec1.push_back(make_pair(p[2][3],p[2][4]));
+cout<<vec1[0].first;
+
 for(int i=0;i<5;i++){
     delete[] p[i];  //delete p[][] first
 }
@@ -42,7 +48,13 @@ string R;
 priority_queue<int> Y;  //max heap  //top  push pop 
 priority_queue<int, vector<int>, greater<int> > Z; //min heap  //top  push pop 
 
+string AA;
+AA.empty();
 
+
+        map<int,int> windowL;
+windowL[5]++;
+cout<<windowL[5]<<" asdf";
 //map set
 map<int,int> M;
 // M['b']=7;
@@ -50,7 +62,10 @@ M[5]=5;
 M[6]=6;
 M[4]=4;
 M[3]=3;
-cout<< "aaa"<<M[4];
+for (auto iter = M.rbegin();iter!= M.rend();iter++)
+{
+cout<< "aaa"<<iter->second;
+}
 // M.insert(pair<char,int>('c',8));  //insert
 // M.erase('b');
 //cout<<M['b'];
@@ -72,13 +87,19 @@ if (T.find(16)==T.end()){
 
 //vector
 
-vector<int> v1  ; //1d vector with size 3
-v1.push_back(2);
-v1.push_back(4);
-v1.push_back(25);
-v1.push_back(5);
-v1.push_back(1);
-cout<<find(v1.begin(),v1.end(),4)-v1.begin()<<"  aaaaaa ";
+vector<int> v1 (6,0) ; //1d vector with size 3
+v1.push_back(7);
+v1.push_back(8);
+cout<<"the index of 7 is "<< find(v1.begin(),v1.end(),7)-v1.begin()<<endl;
+cout<<"the index of 7 is "<< distance(v1.begin(),find(v1.begin(),v1.end(),7))<<endl;
+
+vector<vector<int> > v4  (10, vector<int> (5,0));//create 10 row with each row a vector with 5 elements with all 0
+vector<vector<int> > v5  (10, vector<int> (5,1));
+v5[0] = v4[0];
+cout<<v5[0][0]<<v5[2][1]<<" bbbb"<<endl;
+//v1[0]=7;
+
+cout<<find(v1.begin(),v1.end(),7)-v1.begin()<<"  aaaaaa ";
 
 make_heap(v1.begin(),v1.end()); //make vector as heap
 sort_heap(v1.begin(),v1.end()); //sort heap and make it not the heap
