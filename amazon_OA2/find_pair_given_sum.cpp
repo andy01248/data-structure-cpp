@@ -46,6 +46,45 @@ public:
         }
          return res;
     }
+
+vector<int> movie(vector<int>& nums, int target) {
+        int flag=0; //to show there is result
+        vector<int> Mlength = nums;
+        sort(Mlength.begin(),Mlength.end());
+
+        int MAX=INT_MIN; //note down the largest element
+        vector<int> temp(2,0);
+        vector<int> res (2,0);
+        if (nums.empty()) return res;
+
+        //vector<int> res ;
+        for (int i=Mlength.size()-1; i>-1;i--){
+            for (int j=0;j<i;j++){
+                if (Mlength[i]+Mlength[j]<=target){
+                    if (Mlength[i]+Mlength[j]>MAX){
+                        MAX=Mlength[i]+Mlength[j];
+                        temp[0]=Mlength[i];
+                        temp[1]=Mlength[j];
+                        flag=1;
+                    }
+                }
+                else break;
+            }      
+        }
+            if(flag==1){
+                //cout<<temp[0]<<temp[1]<<endl;
+                res[0]=find(nums.begin(),nums.end(),temp[0])-nums.begin();
+                res[1]=find(nums.begin(),nums.end(),temp[1])-nums.begin();            
+            }
+            else{
+
+                res[0]=find(nums.begin(),nums.end(),Mlength[Mlength.size()-1])-nums.begin();
+                res[1]=find(nums.begin(),nums.end(),Mlength[Mlength.size()-2])-nums.begin();   
+            }
+         return res;
+    }
+
+
 };
 
 int main(){
@@ -56,20 +95,20 @@ int main(){
     for (int i=0; i<nums.size();i++){
         nums[i]=a[i];
     }
-    int k = 190;
+    int k = 50;
     Solution myclass;
-    vector<int> res = myclass.twoSum(nums,k);
+    vector<int> res = myclass.movie(nums,k);
 
         for (int i=0; i<res.size();i++){
             cout<<res[i]<<endl;
     }
 
-    int c[7][2];
+    // int c[7][2];
     
-    cout<<c[0][2];
-    cout<<sizeof(c);
-    string ab ="abcdef";
-    string abc=ab.substr(0,3);
-    cout<<abc;
+    // cout<<c[0][2];
+    // cout<<sizeof(c);
+    // string ab ="abcdef";
+    // string abc=ab.substr(0,3);
+    // cout<<abc;
 
 }
