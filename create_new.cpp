@@ -32,6 +32,9 @@ vector< pair<int,int> > vec1;
 vec1.push_back(make_pair(p[2][3],p[2][4]));
 cout<<vec1[0].first;
 
+//create vector with initial values
+vector<int> vec2 = {1,2,3};
+
 for(int i=0;i<5;i++){
     delete[] p[i];  //delete p[][] first
 }
@@ -86,7 +89,7 @@ if (T.find(16)==T.end()){
 }
 
 //vector
-
+vector<int> v11;
 vector<int> v1 (6,0) ; //1d vector with size 3
 v1.push_back(7);
 v1.push_back(8);
